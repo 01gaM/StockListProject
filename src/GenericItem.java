@@ -1,6 +1,6 @@
+import java.util.Objects;
 
-
-public class GenericItem implements Cloneable{
+public class GenericItem implements Cloneable {
     public int ID; // ID товара
     public String name; // Наименование товара
     public float price; //Цена товара
@@ -13,23 +13,40 @@ public class GenericItem implements Cloneable{
     }
 
     //Задание 2.2
-    public boolean equals(Object o){
-        return (this == o);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GenericItem)) return false;
+        GenericItem that = (GenericItem) o;
+        return this.ID == that.ID &&
+                (that.price == price) &&
+                name.equals(that.name) &&
+                Objects.equals(analog, that.analog) &&
+                category == that.category;
     }
 
-    public Object clone()  throws CloneNotSupportedException{
-        GenericItem genericItem = (GenericItem)super.clone();
-        return genericItem;
+
+    @Override
+    public int hashCode() {
+        //реализация Objects.hash(ID, name, price, analog, category);
+        Object[] a = {ID, name, price, analog, category};
+
+        int result = 1;
+
+        for (Object element : a)
+            result = 31 * result + (element == null ? 0 : element.hashCode());
+
+        return result;
     }
 
-    public String toString(){
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        if (this.analog == null) return super.clone();
+        return analog.clone(); //Задание 2.3
+    }
+
+    @Override
+    public String toString() {
         return getClass().getName() + "@" + Integer.toHexString(hashCode());
     }
-
-    //Задание 2.3
-    public Object cloneAnalog()  throws CloneNotSupportedException{
-        GenericItem genericItem = (GenericItem)analog.clone();
-        return genericItem;
-    }
-
 }

@@ -94,7 +94,7 @@ public class Main {
         foodItem11.analog = foodItem12;
         System.out.println("Аналог:");
         foodItem11.analog.printAll();
-        FoodItem copy2 = (FoodItem)foodItem11.cloneAnalog();
+        FoodItem copy2 = (FoodItem)foodItem11.clone();
         System.out.println("Копия аналога:");
         copy2.printAll();
 
