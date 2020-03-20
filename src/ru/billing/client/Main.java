@@ -1,9 +1,14 @@
+package ru.billing.client;
+
+import ru.U0901Main;
+import ru.billing.stocklist.*;
+
 import java.util.Date;
 
 public class Main {
 
     public static void main(String[] args) throws CloneNotSupportedException {
-        GenericItem.currentID = 1; //инициализация ID
+        GenericItem.setCurrentID(1); //инициализация ID
 
         //Задание 1.1
         GenericItem genericItem1 = new GenericItem("chair", 800, Category.GENERAL);
@@ -21,19 +26,16 @@ public class Main {
         FoodItem foodItem2 = new FoodItem("cheese", 100, null, new Date(2020, 1, 19), (short) 15);
 
         TechnicalItem technicalItem1 = new TechnicalItem();
-        technicalItem1.ID = GenericItem.currentID++;
-        technicalItem1.name = "laptop";
-        technicalItem1.price = 80000;
-        technicalItem1.category = Category.GENERAL;
-        technicalItem1.warrantyTime = 730;
+        technicalItem1.setName("laptop");
+        technicalItem1.setPrice(80000);
+        technicalItem1.setCategory(Category.GENERAL);
+        technicalItem1.setWarrantyTime((short) 730);
 
         TechnicalItem technicalItem2 = new TechnicalItem();
-        technicalItem2.ID = GenericItem.currentID++;
-
-        technicalItem2.name = "camera";
-        technicalItem2.price = 9000;
-        technicalItem2.category = Category.GENERAL;
-        technicalItem2.warrantyTime = 365;
+        technicalItem2.setName("camera");
+        technicalItem2.setPrice(9000);
+        technicalItem2.setCategory(Category.GENERAL);
+        technicalItem2.setWarrantyTime((short) 365);
 
         GenericItem[] items = {foodItem1, foodItem2, technicalItem1, technicalItem2};
 
@@ -60,9 +62,9 @@ public class Main {
         //Задание 2.3
         System.out.println("\nОригинал:");
         foodItem11.printAll();
-        foodItem11.analog = foodItem12;
+        foodItem11.setAnalog(foodItem12);
         System.out.println("Аналог:");
-        foodItem11.analog.printAll();
+        foodItem11.getAnalog().printAll();
         FoodItem copy2 = (FoodItem) foodItem11.clone();
         System.out.println("Копия аналога:");
         copy2.printAll();
@@ -82,5 +84,44 @@ public class Main {
         System.out.println("\n\nСтрока со значениями полей объекта: " + line);
         System.out.println("Новый объект по данным строки:");
         newFoodItem.printAll();
+
+
+        ////////Лаб 4 ////////
+        //Упражнение 4-1
+        System.out.println("\n//////Лаб 4//////\n");
+        ItemCatalog itemCatalog = new ItemCatalog();
+        itemCatalog.addItem(genericItem1);
+        itemCatalog.addItem(genericItem2);
+        itemCatalog.addItem(genericItem3);
+        itemCatalog.addItem(foodItem1);
+        itemCatalog.addItem(foodItem2);
+        itemCatalog.addItem(technicalItem1);
+        itemCatalog.addItem(technicalItem2);
+        itemCatalog.addItem(foodItem11);
+        itemCatalog.addItem(foodItem12);
+        itemCatalog.addItem(newFoodItem);
+
+        itemCatalog.printItems();
+
+        //Сравнение скорости поиска по двум типам коллекций
+        System.out.println("\nSearch speed:");
+
+        long begin = new Date().getTime();
+        for (int i = 0; i < 100000; i++)
+            itemCatalog.findItemByID(10);
+        long end = new Date().getTime();
+        System.out.println("In HashMap: " + (end - begin));
+
+        begin = new Date().getTime();
+        for (int i = 0; i < 100000; i++)
+            itemCatalog.findItemByIDAL(10);
+        end = new Date().getTime();
+        System.out.println("In ArrayList: " + (end - begin));
+
+        //Упражнение 4-2
+        CatalogLoader loader = new CatalogStubLoader();
+        loader.load(itemCatalog);
+        System.out.println("\nUpdated catalog: ");
+        itemCatalog.printItems();
     }
 }
