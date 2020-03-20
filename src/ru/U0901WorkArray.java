@@ -1,3 +1,5 @@
+package ru;
+
 public class U0901WorkArray<T extends Number> {
     private T[] arrNums;
 

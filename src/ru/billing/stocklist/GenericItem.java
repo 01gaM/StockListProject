@@ -1,13 +1,15 @@
+package ru.billing.stocklist;
+
 import java.util.Objects;
 
 public class GenericItem implements Cloneable {
-    public int ID; // ID товара
-    public String name; // Наименование товара
-    public float price; //Цена товара
-    public GenericItem analog; //Товар-аналог (Задание 1.1 пункт 4)
-    public Category category = Category.GENERAL; //Категория товара (Задание 1.2)
+    private int ID; // ID товара
+    private String name; // Наименование товара
+    private float price; //Цена товара
+    private GenericItem analog; //Товар-аналог (Задание 1.1 пункт 4)
+    private Category category = Category.GENERAL; //Категория товара (Задание 1.2)
 
-    static int currentID; //максимальный назначенный ID товара в текущей сессии (Лаб 3. 1-1)
+    private static int currentID; //максимальный назначенный ID товара в текущей сессии (Лаб 3. 1-1)
 
 
     public GenericItem(String name, float price, Category category) {
@@ -28,7 +30,7 @@ public class GenericItem implements Cloneable {
         this.ID = GenericItem.currentID++;
     }
 
-    void printAll() {
+    public void printAll() {
         System.out.printf("ID: %d, Name: %-20s, price: %5.2f, category: %-10s\n", ID, name, price, category);
     }
 
@@ -67,6 +69,54 @@ public class GenericItem implements Cloneable {
 
     @Override
     public String toString() {
-        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+        return "ID: " + this.ID + "; name: " + this.name + "; price: " + this.price + "; category: " + this.category;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public GenericItem getAnalog() {
+        return analog;
+    }
+
+    public void setAnalog(GenericItem analog) {
+        this.analog = analog;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static int getCurrentID() {
+        return currentID;
+    }
+
+    public static void setCurrentID(int currentID) {
+        GenericItem.currentID = currentID;
     }
 }
