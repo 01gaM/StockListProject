@@ -1,6 +1,6 @@
 package ru.billing.stocklist;
 
-import ru.billing.exceptions.ItemAlreadyExistsException;
+import ru.itmo.exceptions.ItemAlreadyExistsException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

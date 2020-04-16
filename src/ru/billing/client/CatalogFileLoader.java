@@ -1,7 +1,7 @@
 package ru.billing.client;
 
-import ru.billing.exceptions.CatalogLoadException;
-import ru.billing.exceptions.ItemAlreadyExistsException;
+import ru.itmo.exceptions.CatalogLoadException;
+import ru.itmo.exceptions.ItemAlreadyExistsException;
 import ru.billing.stocklist.FoodItem;
 import ru.billing.stocklist.ItemCatalog;
 

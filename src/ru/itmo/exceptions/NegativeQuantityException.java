@@ -1,4 +1,4 @@
-package ru.billing.exceptions;
+package ru.itmo.exceptions;
 
 /**
  * Исключение, выбрасываемое методом remQuantity
