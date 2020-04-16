@@ -1,18 +1,13 @@
 package ru.billing.client;
 
-
 import ru.U0901Main;
 import ru.billing.stocklist.*;
-import ru.sync.U1901Main;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws CloneNotSupportedException {
         GenericItem.setCurrentID(1); //инициализация ID
 
         //Задание 1.1
@@ -80,7 +75,6 @@ public class Main {
         System.out.println("\n//////Лаб 3//////\n");
         U0901Main.main();
 
-
         //Задание 3-1
         String line = "Конфеты 'Маска';45;120"; //<name>;<price>;<expires>
         String[] item_fld = line.split(";");
@@ -129,35 +123,5 @@ public class Main {
         loader.load(itemCatalog);
         System.out.println("\nUpdated catalog: ");
         itemCatalog.printItems();
-
-        //////Лаб 6///////
-        System.out.println("\n//////Лаб 6//////\n");
-
-        //Загрузка в каталог из файла
-        CatalogFileLoader catalogFileLoader = new CatalogFileLoader("items.lst");
-        catalogFileLoader.load(itemCatalog);
-        System.out.println("Updated catalog: ");
-        itemCatalog.printItems();
-
-
-        //Чтение из файла в разных кодировках
-        System.out.println("\nСодержимое файла в кодировке UTF-8:");
-        File resUTF8 = new File("file1.txt");
-        FileInputStream fis1 = new FileInputStream(resUTF8);
-        Scanner scanner = new Scanner(fis1);
-        String strUTF8 = new String(scanner.nextLine().getBytes("UTF-8"), "UTF-8");
-        System.out.println(strUTF8);
-
-        System.out.println("\nСодержимое файла в кодировке Windows-1251:");
-        File resW1251 = new File("file2.txt");
-        FileInputStream fis2 = new FileInputStream(resW1251);
-        Scanner scanner2 = new Scanner(fis2);
-        String strW1251 = new String(scanner2.nextLine().getBytes("Windows-1251"), "UTF-8");
-        System.out.println(strW1251);
-
-        //Задание с потоками
-        System.out.println();
-        U1901Main.test();
-
     }
 }
